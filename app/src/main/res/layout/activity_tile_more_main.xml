@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"    
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,55 +22,5 @@
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_tile_more_main" />
-
-
-    <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/profilelist"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom|end"
-        android:layout_marginRight="8dp"
-        android:src="@android:drawable/ic_menu_add"
-        fab:fab_colorNormal="@color/fab_primary"
-        fab:fab_colorPressed="@color/fab_primary_dark"
-        fab:fab_colorRipple="@color/fab_primary_dark"
-        fab:menu_backgroundColor="@android:color/transparent"
-        fab:menu_fab_hide_animation="@anim/jump_to_down"
-        fab:menu_fab_show_animation="@anim/jump_from_down"
-        fab:menu_labels_position="left"
-        fab:menu_openDirection="up">
-
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fab1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_marginBottom="8dp"
-            android:layout_marginRight="8dp"
-            android:src="@drawable/ic_schedule"
-            fab:fab_colorNormal="@color/fab_primary"
-            fab:fab_colorPressed="@color/fab_primary_pressed"
-            fab:fab_colorRipple="@color/fab_ripple"
-            fab:fab_label="Profile Schedule"
-            fab:fab_size="mini" />
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fab2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:src="@drawable/ic_stopwatch"
-            fab:fab_colorNormal="@color/fab_primary"
-            fab:fab_colorPressed="@color/fab_primary_pressed"
-            fab:fab_colorRipple="@color/fab_ripple"
-            fab:fab_label="Profile Timer"
-            fab:fab_size="mini" />
-
-    </com.github.clans.fab.FloatingActionMenu>        
 
 </android.support.design.widget.CoordinatorLayout>

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,7 +14,9 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -21,16 +24,19 @@ import com.github.clans.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 
-
 public class TileMoreMainActivity extends AppCompatActivity {
 
     private static final String TAG = "TileMoreActivity";
-    private FloatingActionButton fab1, fab2;
-    private static Integer mLastClickedPosition = -1;
+    //private FloatingActionButton fab1, fab2;
 
-    GridView gridView;
+    public TileMore tilemore;
+
+    public Bitmap AddIcon;
+    public ImageButton AddButton;
+
+ /*   private GridView gridView;
     ArrayList<Item> gridArray = new ArrayList<Item>();
-    TileGridViewAdapter customGridAdapter;
+    TileGridViewAdapter customGridAdapter;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +44,16 @@ public class TileMoreMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tile_more_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
+        GridView gridView;
+
+        ArrayList<Item> gridArray = new ArrayList<Item>();
+        TileGridViewAdapter customGridAdapter;
+
+        tilemore = new TileMore(this);
+
+
         setSupportActionBar(toolbar);
+
 
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -48,40 +63,42 @@ public class TileMoreMainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
-
-        fab1 = (FloatingActionButton) findViewById(R.id.fab1);
-        fab2 = (FloatingActionButton) findViewById(R.id.fab2);
-
-        fab1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AddNewTile(1);
-            }
-        });
-
-        fab2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AddCustomTile(1);
-            }
-        });
-
         //set grid view item
-        Bitmap AddIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.add_tile);
+/*        Bitmap AddIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.add_tile);
+        ImageButton AddButton = (ImageButton)findViewById(R.id.button);;
 
-        gridArray.add(new Item(AddIcon,"Add Tile"));
-        gridArray.add(new Item(AddIcon,"Add Tile"));
-        gridArray.add(new Item(AddIcon,"Add Tile"));
-        gridArray.add(new Item(AddIcon,"Add Tile"));
-        gridArray.add(new Item(AddIcon,"Add Tile"));
-        gridArray.add(new Item(AddIcon,"Add Tile"));
-        gridArray.add(new Item(AddIcon,"Add Tile"));
-        gridArray.add(new Item(AddIcon,"Add Tile"));
-        gridArray.add(new Item(AddIcon,"Add Tile"));
-        gridArray.add(new Item(AddIcon,"Add Tile"));
-        gridArray.add(new Item(AddIcon,"Add Tile"));
-        gridArray.add(new Item(AddIcon,"Add Tile"));
+*/
+       /* if (tilemore.isTileEnabled()) {
+            AddIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.tile_disabled);
+            AddButton = (ImageButton) findViewById(R.id.button);
+        } else {
+            AddIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.add_tile);
+            AddButton = (ImageButton) findViewById(R.id.button);
+        }*/
 
+  /*      gridArray.add(new Item(AddIcon,"Add Tile",AddButton));
+        gridArray.add(new Item(AddIcon,"Add Tile",AddButton));
+        gridArray.add(new Item(AddIcon,"Add Tile",AddButton));
+        gridArray.add(new Item(AddIcon,"Add Tile",AddButton));
+        gridArray.add(new Item(AddIcon,"Add Tile",AddButton));
+        gridArray.add(new Item(AddIcon,"Add Tile",AddButton));
+        gridArray.add(new Item(AddIcon,"Add Tile",AddButton));
+        gridArray.add(new Item(AddIcon,"Add Tile",AddButton));
+        gridArray.add(new Item(AddIcon,"Add Tile",AddButton));
+        gridArray.add(new Item(AddIcon,"Add Tile",AddButton));
+        gridArray.add(new Item(AddIcon,"Add Tile",AddButton));
+        gridArray.add(new Item(AddIcon,"Add Tile",AddButton));*/
+
+        for(int i = 0; i < 11; i++) {
+            if (tilemore.isTileEnabled(i)) {
+                AddIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.tile_disabled);
+                AddButton = (ImageButton) findViewById(R.id.button);
+            } else {
+                AddIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.add_tile);
+                AddButton = (ImageButton) findViewById(R.id.button);
+            }
+            gridArray.add(new Item(AddIcon,"Add Tile",AddButton,tilemore.isTileEnabled(i)));
+        }
 
         gridView = (GridView) findViewById(R.id.gridview);
         customGridAdapter = new TileGridViewAdapter(this, R.layout.row_grid, gridArray);
@@ -94,6 +111,9 @@ public class TileMoreMainActivity extends AppCompatActivity {
                 AddNewTile(position);
                 ImageView imageView = (ImageView) v.findViewById(R.id.item_image);
                 imageView.setImageResource(R.drawable.tile_disabled);
+                ImageButton button = (ImageButton) v.findViewById(R.id.button);
+                button.setVisibility(View.VISIBLE);
+                tilemore.preferences.put("tile_enabled" + "_" + position, true);
                 }
         });
 
