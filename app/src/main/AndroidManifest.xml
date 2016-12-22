@@ -18,8 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service
-            android:name=".TileMoreTileService0"
+            android:name=".TileMoreTileService.TileMoreTileService0"
             android:enabled="false"
             android:icon="@drawable/tile_disabled"
             android:label="@string/tile_label"
@@ -29,7 +30,87 @@
             </intent-filter>
         </service>
         <service
-            android:name=".TileMoreTileService1"
+            android:name=".TileMoreTileService.TileMoreTileService1"
+            android:enabled="false"
+            android:icon="@drawable/tile_disabled"
+            android:label="@string/tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".TileMoreTileService.TileMoreTileService2"
+            android:enabled="false"
+            android:icon="@drawable/tile_disabled"
+            android:label="@string/tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".TileMoreTileService.TileMoreTileService3"
+            android:enabled="false"
+            android:icon="@drawable/tile_disabled"
+            android:label="@string/tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".TileMoreTileService.TileMoreTileService4"
+            android:enabled="false"
+            android:icon="@drawable/tile_disabled"
+            android:label="@string/tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".TileMoreTileService.TileMoreTileService5"
+            android:enabled="false"
+            android:icon="@drawable/tile_disabled"
+            android:label="@string/tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".TileMoreTileService.TileMoreTileService6"
+            android:enabled="false"
+            android:icon="@drawable/tile_disabled"
+            android:label="@string/tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".TileMoreTileService.TileMoreTileService7"
+            android:enabled="false"
+            android:icon="@drawable/tile_disabled"
+            android:label="@string/tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".TileMoreTileService.TileMoreTileService8"
+            android:enabled="false"
+            android:icon="@drawable/tile_disabled"
+            android:label="@string/tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".TileMoreTileService.TileMoreTileService9"
             android:enabled="false"
             android:icon="@drawable/tile_disabled"
             android:label="@string/tile_label"

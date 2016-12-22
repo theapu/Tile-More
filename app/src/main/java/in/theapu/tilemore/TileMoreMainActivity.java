@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,29 +13,23 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.github.clans.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 
 public class TileMoreMainActivity extends AppCompatActivity {
 
     private static final String TAG = "TileMoreActivity";
-    //private FloatingActionButton fab1, fab2;
 
     public TileMore tilemore;
 
+    Context context;
+
     public Bitmap AddIcon;
     public ImageButton AddButton;
-
- /*   private GridView gridView;
-    ArrayList<Item> gridArray = new ArrayList<Item>();
-    TileGridViewAdapter customGridAdapter;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +39,7 @@ public class TileMoreMainActivity extends AppCompatActivity {
 
         GridView gridView;
 
-        ArrayList<Item> gridArray = new ArrayList<Item>();
+        ArrayList<TileMoreItem> gridArray = new ArrayList<TileMoreItem>();
         TileGridViewAdapter customGridAdapter;
 
         tilemore = new TileMore(this);
@@ -54,40 +47,6 @@ public class TileMoreMainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-        //set grid view item
-/*        Bitmap AddIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.add_tile);
-        ImageButton AddButton = (ImageButton)findViewById(R.id.button);;
-
-*/
-       /* if (tilemore.isTileEnabled()) {
-            AddIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.tile_disabled);
-            AddButton = (ImageButton) findViewById(R.id.button);
-        } else {
-            AddIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.add_tile);
-            AddButton = (ImageButton) findViewById(R.id.button);
-        }*/
-
-  /*      gridArray.add(new Item(AddIcon,"Add Tile",AddButton));
-        gridArray.add(new Item(AddIcon,"Add Tile",AddButton));
-        gridArray.add(new Item(AddIcon,"Add Tile",AddButton));
-        gridArray.add(new Item(AddIcon,"Add Tile",AddButton));
-        gridArray.add(new Item(AddIcon,"Add Tile",AddButton));
-        gridArray.add(new Item(AddIcon,"Add Tile",AddButton));
-        gridArray.add(new Item(AddIcon,"Add Tile",AddButton));
-        gridArray.add(new Item(AddIcon,"Add Tile",AddButton));
-        gridArray.add(new Item(AddIcon,"Add Tile",AddButton));
-        gridArray.add(new Item(AddIcon,"Add Tile",AddButton));
-        gridArray.add(new Item(AddIcon,"Add Tile",AddButton));
-        gridArray.add(new Item(AddIcon,"Add Tile",AddButton));*/
 
         for(int i = 0; i < 11; i++) {
             if (tilemore.isTileEnabled(i)) {
@@ -97,18 +56,18 @@ public class TileMoreMainActivity extends AppCompatActivity {
                 AddIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.add_tile);
                 AddButton = (ImageButton) findViewById(R.id.button);
             }
-            gridArray.add(new Item(AddIcon,"Add Tile",AddButton,tilemore.isTileEnabled(i)));
+            gridArray.add(new TileMoreItem(AddIcon,"Add Tile",AddButton,tilemore.isTileEnabled(i)));
         }
 
         gridView = (GridView) findViewById(R.id.gridview);
         customGridAdapter = new TileGridViewAdapter(this, R.layout.row_grid, gridArray);
         gridView.setAdapter(customGridAdapter);
+        context = this;
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View v, int position, long arg3) {
-                //Toast.makeText(getApplicationContext(),gridArray.get(position).getTitle(), Toast.LENGTH_SHORT).show();
-                AddNewTile(position);
+                EnableTile(position, context);
                 ImageView imageView = (ImageView) v.findViewById(R.id.item_image);
                 imageView.setImageResource(R.drawable.tile_disabled);
                 ImageButton button = (ImageButton) v.findViewById(R.id.button);
@@ -141,23 +100,23 @@ public class TileMoreMainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void AddNewTile(Integer position) {
-        Log.v(TAG, "in onItemClick fab1" + this);
-        Toast.makeText(this, "Hello Toast Message! This is fab 1", Toast.LENGTH_LONG).show();
+    public static void EnableTile(Integer position, Context context) {
+        Log.v(TAG, "in onItemClick fab1" + context);
+        Toast.makeText(context, "Hello Toast Message! This is fab 1", Toast.LENGTH_LONG).show();
         try {
-            Class<?> theClass = Class.forName("in.theapu.tilemore.TileMoreTileService" + position );
-            enableComponent(this, theClass, true);
+            Class<?> theClass = Class.forName("in.theapu.tilemore.TileMoreTileService.TileMoreTileService" + position );
+            enableComponent(context, theClass, true);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    private void AddCustomTile(Integer position) {
-        Log.v(TAG, "in onItemClick fab2" + this);
-        Toast.makeText(this, "Hello Toast Message! This is fab 2", Toast.LENGTH_LONG).show();
+    public static void DisableTile(Integer position, Context context) {
+        Log.v(TAG, "in onItemClick fab2" + context);
+        Toast.makeText(context, "Hello Toast Message! This is fab 2", Toast.LENGTH_LONG).show();
         try {
-            Class<?> theClass = Class.forName("in.theapu.tilemore.TileMoreTileService" + position );
-            enableComponent(this, theClass, true);
+            Class<?> theClass = Class.forName("in.theapu.tilemore.TileMoreTileService.TileMoreTileService" + position );
+            enableComponent(context, theClass, false);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -175,4 +134,9 @@ public class TileMoreMainActivity extends AppCompatActivity {
                 new ComponentName(context, componentClass),
                 enableFlag, PackageManager.DONT_KILL_APP);
     }
+
+ //   public void resetTileImage(int i) {
+ //       tilemore.preferences.put("tile_enabled" + "_" + i, false);
+ //   }
+
 }

@@ -1,12 +1,7 @@
 package in.theapu.tilemore;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.widget.GridView;
-import android.widget.ImageButton;
 
-import java.util.ArrayList;
 
 /**
  * Created by apu on 21/12/16.
@@ -29,5 +24,4 @@ public class TileMore {
         Boolean tilestatus = preferences.getBoolean("tile_enabled" + "_" + i, false);
         return tilestatus;
     }
-
 }
