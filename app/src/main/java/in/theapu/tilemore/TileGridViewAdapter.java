@@ -21,6 +21,8 @@ public class TileGridViewAdapter extends ArrayAdapter<TileMoreItem> {
     Context context;
     int layoutResourceId;
 
+
+
     public TileMore tilemore;
 
     ArrayList<TileMoreItem> data = new ArrayList<TileMoreItem>();

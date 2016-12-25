@@ -25,4 +25,10 @@
         android:stretchMode="spacingWidthUniform"
         android:verticalSpacing="50dp" />
 
+    <FrameLayout
+        android:id="@+id/your_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+
 </RelativeLayout>

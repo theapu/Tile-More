@@ -16,9 +16,12 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import android.support.v4.app.FragmentManager;
 
 public class TileMoreMainActivity extends AppCompatActivity {
 
@@ -30,11 +33,19 @@ public class TileMoreMainActivity extends AppCompatActivity {
 
     public Bitmap AddIcon;
     public ImageButton AddButton;
+    public ProgressBar spinner;
+
+
+    FragmentManager fragmentManager = getSupportFragmentManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tile_more_main);
+
+        spinner = (ProgressBar)findViewById(R.id.progressBar);
+        spinner.setVisibility(View.GONE);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         GridView gridView;
@@ -48,7 +59,7 @@ public class TileMoreMainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        for(int i = 0; i < 11; i++) {
+        for(int i = 0; i < 10; i++) {
             if (tilemore.isTileEnabled(i)) {
                 AddIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.tile_disabled);
                 AddButton = (ImageButton) findViewById(R.id.button);
@@ -73,6 +84,17 @@ public class TileMoreMainActivity extends AppCompatActivity {
                 ImageButton button = (ImageButton) v.findViewById(R.id.button);
                 button.setVisibility(View.VISIBLE);
                 tilemore.preferences.put("tile_enabled" + "_" + position, true);
+
+                spinner = (ProgressBar) findViewById(R.id.progressBar);
+                spinner.setVisibility(View.VISIBLE);
+
+
+                //GenerateActivityList(pm);
+
+                ShowActivityList();
+
+                //spinner.setVisibility(View.GONE);
+
                 }
         });
 
@@ -138,5 +160,15 @@ public class TileMoreMainActivity extends AppCompatActivity {
  //   public void resetTileImage(int i) {
  //       tilemore.preferences.put("tile_enabled" + "_" + i, false);
  //   }
+
+    private void ShowActivityList() {
+//        spinner.setVisibility(View.VISIBLE);
+
+        ActivitiesExpandableListFragment fragment = new ActivitiesExpandableListFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.your_placeholder, fragment)
+                .addToBackStack(null)
+                .commit();
+
+    }
 
 }
